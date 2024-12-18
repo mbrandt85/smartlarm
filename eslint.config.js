@@ -26,6 +26,14 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      '@typescript-eslint/quotes': [
+        'error',
+        'single',
+        {
+          'avoidEscape': true,
+          'allowTemplateLiterals': true
+        }
+      ]
     },
   },
 )

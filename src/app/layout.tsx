@@ -1,56 +1,81 @@
-import { AppShell, Burger, Group, Image, Skeleton } from "@mantine/core"
-import { useDisclosure } from "@mantine/hooks"
-import { Outlet } from "react-router"
-import CurrentUser from "./account/current-user"
+import { Burger, Container, Group, Image, useMantineTheme } from '@mantine/core'
+import styles from './layout.module.css'
+import Search from './search'
+import User from './user'
+import Cart from './cart'
+import { useEffect } from 'react'
+import { useDisclosure, useMediaQuery, useWindowScroll } from '@mantine/hooks'
+import { Outlet, useLocation } from 'react-router'
+import Nav from './nav'
 
 export default function Layout() {
-  const [opened, { toggle }] = useDisclosure()
+  const [opened, { toggle, close }] = useDisclosure()
+  const [scroll] = useWindowScroll()
+  const theme = useMantineTheme()
+  const match = useMediaQuery(`(max-width: ${theme.breakpoints.xs})`)
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    if (opened) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+  }, [opened])
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 })
+    close()
+  }, [pathname])
 
   return (
-    <AppShell
-      header={{ height: 80 }}
-      navbar={{ width: 300, breakpoint: "sm", collapsed: { mobile: !opened } }}
-      aside={{
-        width: 300,
-        breakpoint: "md",
-        collapsed: { desktop: false, mobile: true },
-      }}
-      padding="md"
-    >
-      <AppShell.Header>
-        <Group h="100%" px="md" justify="space-between">
-          <Group>
-            <Burger
-              opened={opened}
-              onClick={toggle}
-              hiddenFrom="sm"
-              size="sm"
-              lineSize={3}
-            />
+    <>
+      <header
+        className={styles.header}
+        data-scroll={scroll.y > 0}
+        data-open={opened}
+      >
+        <Container size='lg' h='100%'>
+          <Group h='100%' justify='space-between'>
+            <Group gap='sm'>
+              <Burger
+                opened={opened}
+                onClick={toggle}
+                hiddenFrom='sm'
+                size='sm'
+                lineSize={2.5}
+              />
 
-            <Image src="/smartlarm.png" height={48} />
+              <Image src='/smartlarm.png' className={styles.logo} />
+            </Group>
+
+            <Group gap='xs'>
+              <Search />
+              <User />
+              <Cart />
+            </Group>
           </Group>
+        </Container>
+      </header>
+      <main className={styles.main}>
+        <Container size='lg'>
+          <div className={styles.content}>
+            <nav
+              data-mobile={match}
+              data-open={opened}
+              data-scroll={scroll.y > 0}
+              className={styles.nav}
+            >
+              <Nav />
+            </nav>
 
-          <Group>icons</Group>
-        </Group>
-      </AppShell.Header>
-
-      <AppShell.Navbar p="md">
-        Navbar
-        {Array(15)
-          .fill(0)
-          .map((_, index) => (
-            <Skeleton key={index} h={28} mt="sm" animate={false} />
-          ))}
-      </AppShell.Navbar>
-
-      <AppShell.Main>
-        <Outlet />
-      </AppShell.Main>
-
-      <AppShell.Aside p="md">
-        <CurrentUser />
-      </AppShell.Aside>
-    </AppShell>
+            <div className={styles.outlet}>
+              <Outlet />
+            </div>
+          </div>
+        </Container>
+      </main>
+      <footer>footer</footer>
+    </>
   )
 }

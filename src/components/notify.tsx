@@ -1,9 +1,9 @@
-import { rem, Text } from "@mantine/core"
-import { notifications } from "@mantine/notifications"
-import { IconCheck, IconExclamationMark, IconX } from "@tabler/icons-react"
-import { CSSProperties } from "react"
+import { rem, Text } from '@mantine/core'
+import { notifications } from '@mantine/notifications'
+import { IconCheck, IconExclamationMark, IconX } from '@tabler/icons-react'
+import { CSSProperties } from 'react'
 
-type NotificationType = "error" | "info" | "success"
+type NotificationType = 'error' | 'info' | 'success'
 
 const iconStyles: CSSProperties = { width: rem(24), height: rem(24) }
 
@@ -15,17 +15,17 @@ const notificationTypes: Record<
   }
 > = {
   info: {
-    color: "blue",
+    color: 'blue',
     icon: <IconExclamationMark style={iconStyles} />,
   },
 
   success: {
-    color: "teal",
+    color: 'teal',
     icon: <IconCheck style={iconStyles} />,
   },
 
   error: {
-    color: "red",
+    color: 'red',
     icon: <IconX style={iconStyles} />,
   },
 }
@@ -44,7 +44,7 @@ export const notify = (
   notifications.show({
     color: notificationTypes[type].color,
     title: title && (
-      <Text fw="bold" c={notificationTypes[type].color}>
+      <Text fw='bold' c={notificationTypes[type].color}>
         {title}
       </Text>
     ),
