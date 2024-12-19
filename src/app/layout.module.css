@@ -7,6 +7,10 @@
   transition: all 0.2s ease-in-out 0s;
   z-index: 10;
   padding: 0 var(--mantine-spacing-md);
+
+  @media (min-width: $mantine-breakpoint-sm) {
+    padding: 0 0 0 var(--mantine-spacing-lg);
+  }
 }
 
 .header[data-scroll='true'][data-mobile='true'],
@@ -17,10 +21,11 @@
 
 .desktopHeader {
   transition: all 0.2s ease-in-out 0s;
+  height: 100%;
 
   @media (min-width: $mantine-breakpoint-sm) {
-    border-radius: 0 0 var(--mantine-radius-md) var(--mantine-radius-md);
-    padding: 0 var(--mantine-spacing-md) 0 var(--mantine-spacing-lg);
+    border-radius: 0 0 0 var(--mantine-radius-lg);
+    padding: 0 var(--mantine-spacing-lg) 0 var(--mantine-spacing-sm);
   }
 }
 
@@ -37,20 +42,8 @@
 
   @media (min-width: $mantine-breakpoint-sm) {
     height: rem(34px);
-  }
-}
-
-.main {
-  width: 100%;
-  padding-top: var(--header-height);
-}
-
-.content {
-  padding: var(--mantine-spacing-md) 0;
-
-  @media (min-width: $mantine-breakpoint-sm) {
-    display: flex;
-    gap: var(--mantine-spacing-xl);
+    margin-left: var(--mantine-spacing-xs);
+    margin-bottom: var(--mantine-spacing-xs);
   }
 }
 
@@ -61,12 +54,15 @@
   width: var(--nav-width);
   height: calc(100% - var(--header-height));
   overflow: auto;
+  padding-bottom: var(--mantine-spacing-xl);
 
   @media (min-width: $mantine-breakpoint-sm) {
-    flex: 0 0 var(--nav-width);
-    position: sticky;
-    top: calc(var(--header-height) + var(--mantine-spacing-md));
-    overflow: visible;
+    top: 0;
+    height: 100%;
+    z-index: 11;
+    padding: var(--mantine-spacing-md);
+    background-color: var(--mantine-color-white);
+    box-shadow: var(--mantine-shadow-sm);
   }
 }
 
@@ -74,13 +70,23 @@
   transition: all 0.2s ease-in-out 0.1s;
   transform: translateX(-100%);
   opacity: 0;
-  padding: var(--mantine-spacing-md);
+  padding: var(--mantine-spacing-md) var(--mantine-spacing-md)
+    var(--mantine-spacing-xl) var(--mantine-spacing-md);
   background-color: var(--mantine-color-white);
 }
 
 .nav[data-mobile='true'][data-open='true'] {
   opacity: 1;
   transform: translateX(0%);
+}
+
+.main {
+  width: 100%;
+  padding-top: var(--header-height);
+
+  @media (min-width: $mantine-breakpoint-sm) {
+    padding-left: var(--nav-width);
+  }
 }
 
 .outlet {

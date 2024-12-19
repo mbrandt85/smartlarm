@@ -7,6 +7,14 @@
     --header-height: rem(64px);
     --nav-width: rem(300px);
   }
+
+  @media (min-width: $mantine-breakpoint-lg) {
+    --nav-width: rem(340px);
+  }
+
+  @media (min-width: $mantine-breakpoint-xl) {
+    --nav-width: rem(380px);
+  }
 }
 
 body {

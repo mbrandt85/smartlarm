@@ -1,4 +1,4 @@
-import { Burger, Container, Group, Image, useMantineTheme } from '@mantine/core'
+import { Burger, Group, Image, useMantineTheme } from '@mantine/core'
 import { useDisclosure, useMediaQuery, useWindowScroll } from '@mantine/hooks'
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router'
@@ -42,48 +42,37 @@ export default function Layout() {
         data-open={opened}
         data-mobile={match}
       >
-        <Group
-          h='100%'
-          justify='space-between'
-          className={styles.desktopHeader}
-          data-scroll={scroll.y > 0}
-        >
-          <Group gap='sm'>
-            <Burger
-              opened={opened}
-              onClick={toggle}
-              hiddenFrom='sm'
-              size='sm'
-              lineSize={2.5}
-            />
+        <Group h='100%' justify={match ? 'space-between' : 'flex-end'}>
+          <Group gap='sm' hiddenFrom='sm'>
+            <Burger opened={opened} onClick={toggle} size='sm' lineSize={2.5} />
 
             <Image src='/smartlarm.png' className={styles.logo} />
           </Group>
 
-          <Group gap='xs'>
+          <Group
+            gap='xs'
+            className={styles.desktopHeader}
+            data-scroll={scroll.y > 0}
+          >
             <Search mobile={!!match} />
             <User />
             <Cart />
           </Group>
         </Group>
       </header>
-      <main className={styles.main}>
-        <Container size='lg'>
-          <div className={styles.content}>
-            <nav
-              data-mobile={match}
-              data-open={opened}
-              data-scroll={scroll.y > 0}
-              className={styles.nav}
-            >
-              <Nav mobile={!!match} />
-            </nav>
 
-            <div className={styles.outlet}>
-              <Outlet />
-            </div>
-          </div>
-        </Container>
+      <nav
+        data-mobile={match}
+        data-open={opened}
+        data-scroll={scroll.y > 0}
+        className={styles.nav}
+      >
+        <Image src='/smartlarm.png' className={styles.logo} visibleFrom='sm' />
+        <Nav />
+      </nav>
+
+      <main className={styles.main}>
+        <Outlet />
       </main>
       <footer>footer</footer>
     </>
