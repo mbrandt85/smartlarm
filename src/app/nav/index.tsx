@@ -27,8 +27,18 @@ const Links = () => (
       label='Produkter'
       leftSection={<IconLayoutGrid size='1rem' />}
     >
-      <NavLink href='#required-for-focus' label='First child link' />
-      <NavLink label='Second child link' href='#required-for-focus' />
+      <NavLink
+        href='#required-for-focus'
+        label='Hubbar, sensorer, kamera, brand & vatten'
+      />
+      <NavLink
+        label='Automatisering, batterier, tillbehör etc.'
+        href='#required-for-focus'
+      />
+      <NavLink
+        label='Dimgeneratorer, Rökgeneratorer'
+        href='#required-for-focus'
+      />
       <NavLink label='Nested parent link' href='#required-for-focus'>
         <NavLink label='First child link' href='#required-for-focus' />
         <NavLink label='Second child link' href='#required-for-focus' />

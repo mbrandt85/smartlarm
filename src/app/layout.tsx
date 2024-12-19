@@ -42,32 +42,30 @@ export default function Layout() {
         data-open={opened}
         data-mobile={match}
       >
-        <Container size='lg' h='100%'>
-          <Group
-            h='100%'
-            justify='space-between'
-            className={styles.desktopHeader}
-            data-scroll={scroll.y > 0}
-          >
-            <Group gap='sm'>
-              <Burger
-                opened={opened}
-                onClick={toggle}
-                hiddenFrom='sm'
-                size='sm'
-                lineSize={2.5}
-              />
+        <Group
+          h='100%'
+          justify='space-between'
+          className={styles.desktopHeader}
+          data-scroll={scroll.y > 0}
+        >
+          <Group gap='sm'>
+            <Burger
+              opened={opened}
+              onClick={toggle}
+              hiddenFrom='sm'
+              size='sm'
+              lineSize={2.5}
+            />
 
-              <Image src='/smartlarm.png' className={styles.logo} />
-            </Group>
-
-            <Group gap='xs'>
-              <Search mobile={!!match} />
-              <User />
-              <Cart />
-            </Group>
+            <Image src='/smartlarm.png' className={styles.logo} />
           </Group>
-        </Container>
+
+          <Group gap='xs'>
+            <Search mobile={!!match} />
+            <User />
+            <Cart />
+          </Group>
+        </Group>
       </header>
       <main className={styles.main}>
         <Container size='lg'>
