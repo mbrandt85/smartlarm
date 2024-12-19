@@ -1,18 +1,18 @@
 import { Burger, Container, Group, Image, useMantineTheme } from '@mantine/core'
+import { useDisclosure, useMediaQuery, useWindowScroll } from '@mantine/hooks'
+import { useEffect } from 'react'
+import { Outlet, useLocation } from 'react-router'
 import styles from './layout.module.css'
 import Search from './search'
 import User from './user'
 import Cart from './cart'
-import { useEffect } from 'react'
-import { useDisclosure, useMediaQuery, useWindowScroll } from '@mantine/hooks'
-import { Outlet, useLocation } from 'react-router'
 import Nav from './nav'
 
 export default function Layout() {
   const [opened, { toggle, close }] = useDisclosure()
   const [scroll] = useWindowScroll()
   const theme = useMantineTheme()
-  const match = useMediaQuery(`(max-width: ${theme.breakpoints.xs})`)
+  const match = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`)
   const { pathname } = useLocation()
 
   useEffect(() => {
@@ -28,15 +28,27 @@ export default function Layout() {
     close()
   }, [pathname])
 
+  useEffect(() => {
+    if (!match) {
+      close()
+    }
+  }, [match])
+
   return (
     <>
       <header
         className={styles.header}
         data-scroll={scroll.y > 0}
         data-open={opened}
+        data-mobile={match}
       >
         <Container size='lg' h='100%'>
-          <Group h='100%' justify='space-between'>
+          <Group
+            h='100%'
+            justify='space-between'
+            className={styles.desktopHeader}
+            data-scroll={scroll.y > 0}
+          >
             <Group gap='sm'>
               <Burger
                 opened={opened}
@@ -50,7 +62,7 @@ export default function Layout() {
             </Group>
 
             <Group gap='xs'>
-              <Search />
+              <Search mobile={!!match} />
               <User />
               <Cart />
             </Group>
@@ -66,7 +78,7 @@ export default function Layout() {
               data-scroll={scroll.y > 0}
               className={styles.nav}
             >
-              <Nav />
+              <Nav mobile={!!match} />
             </nav>
 
             <div className={styles.outlet}>

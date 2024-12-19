@@ -1,4 +1,11 @@
-import { rem, ActionIcon } from '@mantine/core'
+import {
+  rem,
+  ActionIcon,
+  UnstyledButton,
+  Group,
+  Text,
+  Kbd,
+} from '@mantine/core'
 import { Spotlight, SpotlightActionData, spotlight } from '@mantine/spotlight'
 import {
   IconHome,
@@ -6,6 +13,8 @@ import {
   IconFileText,
   IconSearch,
 } from '@tabler/icons-react'
+import styles from './search.module.css'
+import { useOs } from '@mantine/hooks'
 
 const actions: SpotlightActionData[] = [
   {
@@ -37,23 +46,38 @@ const actions: SpotlightActionData[] = [
   },
 ]
 
-export default function Search() {
+export default function Search({ mobile }: { mobile?: boolean }) {
+  const os = useOs()
+
   return (
     <>
-      <ActionIcon
-        onClick={spotlight.open}
-        variant='transparent'
-        size='lg'
-        radius='xl'
-        aria-label='Search'
-        className='navIcon'
-      >
-        <IconSearch />
-      </ActionIcon>
+      {mobile ? (
+        <ActionIcon
+          onClick={spotlight.open}
+          variant='transparent'
+          size='lg'
+          radius='xl'
+          aria-label='Search'
+          className='navIcon'
+        >
+          <IconSearch />
+        </ActionIcon>
+      ) : (
+        <UnstyledButton className={styles.search} onClick={spotlight.open}>
+          <Group justify='space-between'>
+            <Group gap='xs'>
+              <IconSearch />
+              <Text>Sök produkter...</Text>
+            </Group>
+
+            <Kbd size='xs'>{os === 'ios' ? 'Cmd' : 'Ctrl'} + K</Kbd>
+          </Group>
+        </UnstyledButton>
+      )}
 
       <Spotlight
         actions={actions}
-        nothingFound='Nothing found...'
+        nothingFound='Tyvärr, kan inte hitta något...'
         highlightQuery
         searchProps={{
           leftSection: (
@@ -62,7 +86,7 @@ export default function Search() {
               stroke={1.5}
             />
           ),
-          placeholder: 'Sök...',
+          placeholder: 'Sök produkter...',
         }}
       />
     </>

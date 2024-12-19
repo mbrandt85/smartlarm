@@ -1,10 +1,10 @@
 import { useAuth } from '@/hooks/use-auth'
 import { ActionIcon, Popover, Text } from '@mantine/core'
-import { IconUserCircle } from '@tabler/icons-react'
+import { IconUser, IconUserQuestion } from '@tabler/icons-react'
 import { useEffect } from 'react'
 
 export default function User() {
-  const { loading, authState } = useAuth()
+  const { loading, authState, isAuth } = useAuth()
 
   useEffect(() => {
     const unsubscribe = authState()
@@ -13,7 +13,14 @@ export default function User() {
 
   return (
     <>
-      <Popover width={360} position='bottom' withArrow shadow='md'>
+      <Popover
+        width={340}
+        offset={0}
+        position='bottom'
+        withArrow
+        shadow='md'
+        arrowSize={12}
+      >
         <Popover.Target>
           <ActionIcon
             variant='transparent'
@@ -23,14 +30,12 @@ export default function User() {
             className='navIcon'
             loading={loading}
           >
-            <IconUserCircle />
+            {isAuth ? <IconUser /> : <IconUserQuestion />}
           </ActionIcon>
         </Popover.Target>
 
         <Popover.Dropdown>
-          <Text size='sm'>
-            This popover is shown when user hovers the target element
-          </Text>
+          <Text size='sm'>profil, support och inställningar mm...</Text>
         </Popover.Dropdown>
       </Popover>
     </>

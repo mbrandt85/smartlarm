@@ -1,0 +1,24 @@
+.button {
+  border-radius: var(--mantine-radius-md);
+  border: rem(1px) solid var(--mantine-color-gray-4);
+  color: var(--mantine-color-gray-6);
+  padding: rem(6px) rem(12px);
+  box-shadow: var(--mantine-shadow-xs);
+  background-color: var(--mantine-color-white);
+  transition: all 0.2s;
+}
+
+.button:hover {
+  border-color: var(--mantine-color-smartlarm-4);
+  color: var(--mantine-color-smartlarm-6);
+  box-shadow: var(--mantine-shadow-sm);
+}
+
+.button {
+  svg {
+    width: rem(20px);
+    height: rem(20px);
+    stroke: currentColor;
+    stroke-width: 3;
+  }
+}

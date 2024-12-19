@@ -5,12 +5,20 @@
 
   @media (min-width: $mantine-breakpoint-sm) {
     --header-height: rem(64px);
-    --nav-width: rem(260px);
+    --nav-width: rem(300px);
   }
 }
 
 body {
   background-color: var(--mantine-color-gray-0);
+}
+
+.mantine-NavLink-label {
+  font-size: var(--mantine-font-size-md);
+}
+
+.mantine-NavLink-children > * {
+  border-left: rem(1px) solid var(--mantine-color-smartlarm-4);
 }
 
 .navIcon {

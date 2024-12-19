@@ -24,8 +24,8 @@ import('firebase/app').then(async ({ initializeApp }) => {
             alignItems: 'center',
           }}
         >
-          <img src='/smartlarm.png' />
-          Laddar webshoppen...
+          <img src='/smartlarm.png' width='260' />
+          Laddar webbutiken...
         </div>
       </StrictMode>
     )
